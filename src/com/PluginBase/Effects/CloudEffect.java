@@ -24,7 +24,7 @@ public class CloudEffect extends Effect {
 		(
 				PotionEffectType.SLOW_FALLING,	// type
 				600,							// duration
-				1,								// amplifier
+				9,								// amplifier
 				false,							// ambient
 				true,							// particles
 				false							// icon
@@ -37,14 +37,14 @@ public class CloudEffect extends Effect {
 		ParticleEmitter.getInstance().emitParticlesContinuously
 		(
 				entity,							// entity
-				new Vector(0, -1, 0),			// offset
+				new Vector(0, -0.25, 0),			// offset
 				Particle.CLOUD,					// particle
 				10,								// amount
-				0.05,							// speed
-				new Vector(0.5, 0, 0.5),		// spread
+				0.01,							// speed
+				new Vector(0.3, 0, 0.3),		// spread
 				plugin,							// plugin
 				0,								// delay
-				5,								// period
+				2,								// period
 				600								// duration
 				);
 	}
