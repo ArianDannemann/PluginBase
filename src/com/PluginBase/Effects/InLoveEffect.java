@@ -25,14 +25,18 @@ public class InLoveEffect extends Effect {
 				PotionEffectType.REGENERATION,	// type
 				600,							// duration
 				0,								// amplifier
-				true							// ambient
+				false,							// ambient
+				true,							// particles
+				false							// icon
 		);
 		PotionEffect jumpBoost = new PotionEffect
 		(
 				PotionEffectType.JUMP,
 				600,
-				0,
-				true
+				1,
+				false,
+				true,
+				false
 		);
 
 		// Apply the potion effects to the player
@@ -43,14 +47,14 @@ public class InLoveEffect extends Effect {
 		ParticleEmitter.getInstance().emitParticlesContinuously
 		(
 				entity,							// entity
-				new Vector(0, 1.5, 0),			// offset
+				new Vector(0, 2, 0),			// offset
 				Particle.HEART,					// particle
 				30,								// amount
-				0.1,							// speed
-				new Vector(3, 3, 3),			// spread
+				0.05,							// speed
+				new Vector(0, 0, 0),			// spread
 				plugin,							// plugin
 				0,								// delay
-				2,								// period
+				10,								// period
 				600								// duration
 				);
 	}

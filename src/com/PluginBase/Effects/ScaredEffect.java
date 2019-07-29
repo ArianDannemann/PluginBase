@@ -30,15 +30,21 @@ public class ScaredEffect extends Effect {
 		// Prepare the potion effects
 		PotionEffect blindness = new PotionEffect
 		(
-				PotionEffectType.BLINDNESS,	// type
-				600,						// duration
-				0							// amplifier
+				PotionEffectType.BLINDNESS,		// type
+				600,							// duration
+				0,								// amplifier
+				false,							// ambient
+				true,							// particles
+				false							// icon
 		);
 		PotionEffect slowness = new PotionEffect
 		(
 				PotionEffectType.SLOW,
 				600,
-				0
+				0,
+				false,
+				true,
+				false
 		);
 		
 		// Apply the potion effects to the player
