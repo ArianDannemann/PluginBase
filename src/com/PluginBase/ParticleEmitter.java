@@ -24,15 +24,15 @@ public class ParticleEmitter {
 	/**
 	 * Emit particles for a certain amount of time at the location of an entity
 	 * 
-	 * @param entity The entity at which the particles will be emitted
-	 * @param particle The particle type to be emitted
-	 * @param amount How many particles should be emitted
-	 * @param speed How quickly the particles should play their animation
-	 * @param spread The spread of the particles (using the entity location as a base)
-	 * @param plugin The plugin
-	 * @param delay Delay in minecraft ticks until the first particle emits (20 ticks = 1 second)
-	 * @param period Delay in minecraft ticks between particle emissions (20 ticks = 1 second)
-	 * @param duration Duration in minecraft ticks of how long particles will be emitted (20 ticks = 1 second)
+	 * @param entity 		The entity at which the particles will be emitted
+	 * @param particle 		The particle type to be emitted
+	 * @param amount 		How many particles should be emitted
+	 * @param speed			How quickly the particles should play their animation
+	 * @param spread 		The spread of the particles (using the entity location as a base)
+	 * @param plugin 		The plugin
+	 * @param delay 		Delay in minecraft ticks until the first particle emits (20 ticks = 1 second)
+	 * @param period 		Delay in minecraft ticks between particle emissions (20 ticks = 1 second)
+	 * @param duration 		Duration in minecraft ticks of how long particles will be emitted (20 ticks = 1 second)
 	 */
 	public void emitParticlesContinuously(Entity entity, Particle particle, int amount, double speed, Vector spread, Plugin plugin, int delay, int period, int duration) {
 		
@@ -46,7 +46,74 @@ public class ParticleEmitter {
 			public void run() {
 				
 				// Emit particles
-				emitParticles(entity.getWorld(), entity.getLocation(), particle, amount, speed, spread);
+				emitParticles
+				(
+						entity.getWorld(),
+						entity.getLocation(),
+						particle,
+						amount,
+						speed,
+						spread
+				);
+				
+				// Add the time between runs to timer count
+				counter += period;
+				
+				// If counter has run for the needed amount of time
+				if (counter >= duration) {
+					
+					// Cancel this runnable
+					this.cancel();
+				}
+				
+				if (entity.isDead()) {
+					this.cancel();
+				}
+			}
+		};
+		runnable.runTaskTimer(plugin, delay, period);
+	}
+	
+	
+	/**
+	 * Emit particles for a certain amount of time at the location of an entity
+	 * 
+	 * @param entity 		The entity at which the particles will be emitted
+	 * @param offset 		The offset from the entity where the particles will be emitted
+	 * @param particle 		The particle type to be emitted
+	 * @param amount 		How many particles should be emitted
+	 * @param speed			How quickly the particles should play their animation
+	 * @param spread 		The spread of the particles (using the entity location as a base)
+	 * @param plugin 		The plugin
+	 * @param delay 		Delay in minecraft ticks until the first particle emits (20 ticks = 1 second)
+	 * @param period 		Delay in minecraft ticks between particle emissions (20 ticks = 1 second)
+	 * @param duration 		Duration in minecraft ticks of how long particles will be emitted (20 ticks = 1 second)
+	 */
+	public void emitParticlesContinuously(Entity entity, Vector offset, Particle particle, int amount, double speed, Vector spread, Plugin plugin, int delay, int period, int duration) {
+		
+		// Create a synchronous task
+		BukkitRunnable runnable = new BukkitRunnable() {
+			
+			// Keep track of how many times runnable was run
+			int counter = 0;
+			
+			@Override
+			public void run() {
+				
+				// Emit particles
+				emitParticles
+				(
+						entity.getWorld(),
+						LocationHelper.getInstance().offsetLocation
+						(
+								entity.getLocation(),
+								offset
+						),
+						particle,
+						amount,
+						speed,
+						spread
+				);
 				
 				// Add the time between runs to timer count
 				counter += period;
@@ -69,15 +136,15 @@ public class ParticleEmitter {
 	/**
 	 * Emit particles for a certain amount of time at a specific location
 	 * 
-	 * @param location The location at which the particles will be emitted
-	 * @param particle The particle type to be emitted
-	 * @param amount How many particles should be emitted
-	 * @param speed How quickly the particles should play their animation
-	 * @param spread The spread of the particles (using the entity location as a base)
-	 * @param plugin The plugin
-	 * @param delay Delay in minecraft ticks until the first particle emits (20 ticks = 1 second)
-	 * @param period Delay in minecraft ticks between particle emissions (20 ticks = 1 second)
-	 * @param duration Duration in minecraft ticks of how long particles will be emitted (20 ticks = 1 second)
+	 * @param location 		The location at which the particles will be emitted
+	 * @param particle 		The particle type to be emitted
+	 * @param amount 		How many particles should be emitted
+	 * @param speed 		How quickly the particles should play their animation
+	 * @param spread 		The spread of the particles (using the entity location as a base)
+	 * @param plugin 		The plugin
+	 * @param delay 		Delay in minecraft ticks until the first particle emits (20 ticks = 1 second)
+	 * @param period 		Delay in minecraft ticks between particle emissions (20 ticks = 1 second)
+	 * @param duration 		Duration in minecraft ticks of how long particles will be emitted (20 ticks = 1 second)
 	 */
 	public void emitParticlesContinuously(Location location, Particle particle, int amount, double speed, Vector spread, Plugin plugin, int delay, int period, int duration) {
 		
@@ -91,7 +158,15 @@ public class ParticleEmitter {
 			public void run() {
 				
 				// Emit particles
-				emitParticles(location.getWorld(), location, particle, amount, speed, spread);
+				emitParticles
+				(
+						location.getWorld(),
+						location,
+						particle,
+						amount,
+						speed,
+						spread
+				);
 				
 				// Add the time between runs to timer count
 				counter += period;
@@ -110,12 +185,12 @@ public class ParticleEmitter {
 	/**
 	 * Emit particles once at a specific location
 	 * 
-	 * @param world The world in which the particles will be emitted
-	 * @param location The location at which the particles will be emitted
-	 * @param particle The particle type to be emitted
-	 * @param amount How many particles should be emitted
-	 * @param speed How quickly the particles should play their animation
-	 * @param spread The spread of the particles (using the entity location as a base)
+	 * @param world 		The world in which the particles will be emitted
+	 * @param location 		The location at which the particles will be emitted
+	 * @param particle 		The particle type to be emitted
+	 * @param amount 		How many particles should be emitted
+	 * @param speed 		How quickly the particles should play their animation
+	 * @param spread 		The spread of the particles (using the entity location as a base)
 	 */
 	public void emitParticles(World world, Location location, Particle particle, int amount, double speed, Vector spread) {
 		world.spawnParticle(

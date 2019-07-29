@@ -18,9 +18,9 @@ import com.PluginBase.SoundEmitter;
  * 
  * @author Arian Dannemann
  */
-public class Scared extends Effect {
+public class ScaredEffect extends Effect {
 	
-	public Scared(Plugin plugin, LivingEntity entity) {
+	public ScaredEffect(Plugin plugin, LivingEntity entity) {
 		super(plugin, entity);
 	}
 
