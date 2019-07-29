@@ -1,6 +1,8 @@
 package com.PluginBase.Effects;
 
 import org.bukkit.Particle;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
@@ -9,6 +11,7 @@ import org.bukkit.util.Vector;
 
 import com.PluginBase.Effect;
 import com.PluginBase.ParticleEmitter;
+import com.PluginBase.SoundEmitter;
 
 /**
  * This effect is trying to recreate a scared player by adding blindness, slowness and a bunch of particle effects
@@ -25,29 +28,50 @@ public class Scared extends Effect {
 	public void applyEffectToEntity(LivingEntity entity) {
 
 		// Prepare the potion effects
-		PotionEffect blindness = new PotionEffect(
+		PotionEffect blindness = new PotionEffect
+		(
 				PotionEffectType.BLINDNESS,	// type
 				600,						// duration
-				0);							// amplifier
-		PotionEffect slowness = new PotionEffect(
-				PotionEffectType.SLOW,		// type
-				600,						// duration
-				0);							// amplifier
+				0							// amplifier
+		);
+		PotionEffect slowness = new PotionEffect
+		(
+				PotionEffectType.SLOW,
+				600,
+				0
+		);
 		
 		// Apply the potion effects to the player
 		entity.addPotionEffect(blindness);
 		entity.addPotionEffect(slowness);
 		
 		// Play some particle effects at the player location
-		ParticleEmitter.getInstance().emitParticlesContinuously(
-				entity,
-				Particle.SQUID_INK,
-				30,
-				0.1,
-				new Vector(3, 3, 3),
-				plugin,
-				0,
-				2,
-				600);
+		ParticleEmitter.getInstance().emitParticlesContinuously
+		(
+				entity,							// entity
+				Particle.SQUID_INK,				// particle
+				30,								// amount
+				0.1,							// speed
+				new Vector(3, 3, 3),			// spread
+				plugin,							// plugin
+				0,								// delay
+				2,								// period
+				600								// duration
+		);
+		
+		// Play random enderman screams
+		SoundEmitter.getInstance().emitContinuousSoundsRandomly
+		(
+				entity,							// entity
+				Sound.AMBIENT_CAVE,				// sound
+				SoundCategory.HOSTILE,			// sound category
+				1,								// volume
+				1, 								// pitch
+				30,								// chance
+				plugin,							// plugin
+				0,								// delay
+				20,								// period
+				600								// duration
+		);
 	}
 }
