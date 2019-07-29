@@ -10,48 +10,38 @@ import org.bukkit.util.Vector;
 import com.PluginBase.Effect;
 import com.PluginBase.ParticleEmitter;
 
-public class InLoveEffect extends Effect {
+public class CloudEffect extends Effect {
 
-	public InLoveEffect(Plugin plugin, LivingEntity entity) {
+	public CloudEffect(Plugin plugin, LivingEntity entity) {
 		super(plugin, entity);
 	}
 
 	@Override
 	public void applyEffectToEntity(LivingEntity entity) {
 		
-		// Prepare the potion effects
-		PotionEffect regeneration = new PotionEffect
+		// Prepare the potion effect
+		PotionEffect slowFalling = new PotionEffect
 		(
-				PotionEffectType.REGENERATION,	// type
+				PotionEffectType.SLOW_FALLING,	// type
 				600,							// duration
-				0,								// amplifier
+				1,								// amplifier
 				false,							// ambient
 				true,							// particles
 				false							// icon
 		);
-		PotionEffect jumpBoost = new PotionEffect
-		(
-				PotionEffectType.JUMP,
-				600,
-				1,
-				false,
-				true,
-				false
-		);
 
-		// Apply the potion effects to the player
-		entity.addPotionEffect(regeneration);
-		entity.addPotionEffect(jumpBoost);
+		// Apply the potion effect to the player
+		entity.addPotionEffect(slowFalling);
 
 		// Play some particle effects at the player location
 		ParticleEmitter.getInstance().emitParticlesContinuously
 		(
 				entity,							// entity
-				new Vector(0, 2, 0),			// offset
-				Particle.HEART,					// particle
-				1,								// amount
+				new Vector(0, -1, 0),			// offset
+				Particle.CLOUD,					// particle
+				10,								// amount
 				0.05,							// speed
-				new Vector(0, 0, 0),			// spread
+				new Vector(0.5, 0, 0.5),		// spread
 				plugin,							// plugin
 				0,								// delay
 				5,								// period
