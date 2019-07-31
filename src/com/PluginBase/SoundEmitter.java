@@ -50,7 +50,15 @@ public class SoundEmitter {
 				if (MathHelper.getInstance().hasChanceHit(chance)) {
 					
 					// Emit particles
-					emitSound(entity.getWorld(), entity.getLocation(), sound, soundCategory, volume, pitch);
+					emitSound
+					(
+							entity.getWorld(),		// world
+							entity.getLocation(),	// location
+							sound,					// sound
+							soundCategory,			// sound category
+							volume,					// volume
+							pitch					// pitch
+					);
 				}
 				
 				// Add the time between runs to timer count
@@ -80,7 +88,7 @@ public class SoundEmitter {
 	public void emitSound(World world, Location location, Sound sound, SoundCategory soundCategory, float volume, float pitch) {
 		world.playSound(
 				location,			// sound location
-				sound,				// some string?
+				sound,				// sound
 				soundCategory,		// sound category
 				volume,				// volume
 				pitch				// pitch
