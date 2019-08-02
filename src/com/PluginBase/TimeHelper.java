@@ -25,8 +25,8 @@ public class TimeHelper {
 	 * @return			Is the world time night
 	 */
 	public boolean isNight(World world) {
-		return world.getTime() >= nightTime
-				&& world.getTime() <= dayTime;
+		return world.getTime() >= this.nightTime
+				&& world.getTime() <= this.dayTime;
 	}
 	
 	/**
@@ -35,7 +35,7 @@ public class TimeHelper {
 	 * @param world		The world which time will be set to night
 	 */
 	public void setNight(World world) {
-		world.setTime(nightTime);
+		world.setTime(this.nightTime);
 	}
 	
 	/**
@@ -44,7 +44,7 @@ public class TimeHelper {
 	 * @param world		The world which time will be set to day
 	 */
 	public void setDay(World world) {
-		world.setTime(dayTime);
+		world.setTime(this.dayTime);
 	}
 }
 

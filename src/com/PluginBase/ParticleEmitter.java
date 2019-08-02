@@ -57,10 +57,10 @@ public class ParticleEmitter {
 				);
 				
 				// Add the time between runs to timer count
-				counter += period;
+				this.counter += period;
 				
 				// If counter has run for the needed amount of time
-				if (counter >= duration) {
+				if (this.counter >= duration) {
 					
 					// Cancel this runnable
 					this.cancel();
@@ -116,10 +116,10 @@ public class ParticleEmitter {
 				);
 				
 				// Add the time between runs to timer count
-				counter += period;
+				this.counter += period;
 				
 				// If counter has run for the needed amount of time
-				if (counter >= duration) {
+				if (this.counter >= duration) {
 					
 					// Cancel this runnable
 					this.cancel();
@@ -169,10 +169,10 @@ public class ParticleEmitter {
 				);
 				
 				// Add the time between runs to timer count
-				counter += period;
+				this.counter += period;
 				
 				// If counter has run for the needed amount of time
-				if (counter >= duration) {
+				if (this.counter >= duration) {
 					
 					// Cancel this runnable
 					this.cancel();

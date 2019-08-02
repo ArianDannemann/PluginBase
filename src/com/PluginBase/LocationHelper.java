@@ -180,6 +180,7 @@ public class LocationHelper {
 		
 		if (tries >= maximumTries - 1) {
 			Chat.getInstance().sendWarningMessageToConsole(
+					null,
 					"Exceeded maximum amount of tries while trying to find a random nearby location. " 
 					+ "The resulting location may not be suitable for entities");
 		}

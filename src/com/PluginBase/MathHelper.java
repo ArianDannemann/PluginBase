@@ -23,7 +23,7 @@ public class MathHelper {
 	 * @return Random number generator
 	 */
 	public Random getRandom() {
-		return random;
+		return this.random;
 	}
 	
 	/**
@@ -33,7 +33,7 @@ public class MathHelper {
 	 * @return If a hit occured
 	 */
 	public boolean hasChanceHit(double chance) {
-		return random.nextDouble() * 100 <= chance;
+		return this.random.nextDouble() * 100 <= chance;
 	}
 	
 	/**
@@ -43,6 +43,6 @@ public class MathHelper {
 	 * @return If a hit occured
 	 */
 	public boolean hasChanceHit(int chance) {
-		return random.nextInt(101) <= chance;
+		return this.random.nextInt(101) <= chance;
 	}
 }

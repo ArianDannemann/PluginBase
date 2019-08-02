@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 
 /**
  * This class manages everything that has to do with sending chat messages
@@ -23,13 +24,16 @@ public class Chat {
 	 * 
 	 * @param message	The massage which will appear in the console
 	 */
-	public void sendMessageToConsole(String message) {
+	public void sendMessageToConsole(Plugin plugin, String message) {
+		
+		// Get the plugin name, use null if a plugin wasn't given
+		String pluginName = plugin == null ? "null" : plugin.getName();
 		
 		// Get the console sender (so we can send colored chat messages)
 		ConsoleCommandSender consoleSender = Bukkit.getConsoleSender();
 		
 		// Send the message over to the console
-		consoleSender.sendMessage(message);
+		consoleSender.sendMessage("[" + pluginName + "] " + message);
 	}
 	
 	/**
@@ -37,13 +41,10 @@ public class Chat {
 	 * 
 	 * @param message	The massage which will appear in the console
 	 */
-	public void sendWarningMessageToConsole(String message) {
-		
-		// Get the console sender (so we can send colored chat messages)
-		ConsoleCommandSender consoleSender = Bukkit.getConsoleSender();
-		
+	public void sendWarningMessageToConsole(Plugin plugin, String message) {
+
 		// Send the message over to the console
-		consoleSender.sendMessage(ChatColor.YELLOW + "[WARNING] " + message);
+		sendMessageToConsole(plugin, ChatColor.YELLOW + "[WARNING] " + message);
 	}
 	
 	/**
@@ -51,13 +52,10 @@ public class Chat {
 	 * 
 	 * @param message	The massage which will appear in the console
 	 */
-	public void sendErrorMessageToConsole(String message) {
-		
-		// Get the console sender (so we can send colored chat messages)
-		ConsoleCommandSender consoleSender = Bukkit.getConsoleSender();
+	public void sendErrorMessageToConsole(Plugin plugin, String message) {
 		
 		// Send the message over to the console
-		consoleSender.sendMessage(ChatColor.RED + "[ERROR] " + message);
+		sendMessageToConsole(plugin, ChatColor.RED + "[ERROR] " + message);
 	}
 	
 	/**
