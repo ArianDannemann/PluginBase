@@ -52,7 +52,7 @@ public class InLoveEffect extends Effect {
 				1,								// amount
 				0.05,							// speed
 				new Vector(0, 0, 0),			// spread
-				plugin,							// plugin
+				this.plugin,					// plugin
 				0,								// delay
 				5,								// period
 				600								// duration

@@ -2,6 +2,7 @@ package com.PluginBase;
 
 import org.bukkit.Location;
 import org.bukkit.Particle;
+import org.bukkit.Particle.DustOptions;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.plugin.Plugin;
@@ -20,6 +21,13 @@ public class ParticleEmitter {
 	public static ParticleEmitter getInstance() {
 		return particleEmitter;
 	}
+	
+	public Particle[] particleTypesThatNeedData = new Particle[] {
+			Particle.REDSTONE,
+			Particle.ITEM_CRACK,
+			Particle.BLOCK_CRACK,
+			Particle.BLOCK_DUST
+	};
 	
 	/**
 	 * Emit particles for a certain amount of time at the location of an entity
@@ -193,7 +201,23 @@ public class ParticleEmitter {
 	 * @param spread 		The spread of the particles (using the entity location as a base)
 	 */
 	public void emitParticles(World world, Location location, Particle particle, int amount, double speed, Vector spread) {
-		world.spawnParticle(
+		
+		// Loop through all particle types that minecraft expects some data for
+		for (Particle particleThatNeedsData : this.particleTypesThatNeedData) {
+			
+			// Check if the particle type given needs data
+			if (particle == particleThatNeedsData) {
+				
+				// Log the error in the console
+				Chat.getInstance().sendErrorMessageToConsole(null, "Tried to emit particle that needs data: Particle." + particle + " may need additional dust options");
+				
+				// Do not actually spawn the particle
+				return;
+			}
+		}
+		
+		world.spawnParticle
+		(
 				particle,					// Particle type
 				location.getX(),			// Location X
 				location.getY(),			// Location Y
@@ -202,6 +226,34 @@ public class ParticleEmitter {
 				spread.getX(),				// Particle spread X
 				spread.getY(),				// Particle spread Y
 				spread.getZ(),				// Particle spread Z
-				speed);						// Particle speed
+				speed						// Particle speed
+		);
+	}
+	
+	/**
+	 * Emit particles once at a specific location
+	 * 
+	 * @param world 		The world in which the particles will be emitted
+	 * @param location 		The location at which the particles will be emitted
+	 * @param particle 		The particle type to be emitted
+	 * @param amount 		How many particles should be emitted
+	 * @param speed 		How quickly the particles should play their animation
+	 * @param spread 		The spread of the particles (using the entity location as a base)
+	 * @param type			The type of the particle
+	 */
+	public void emitParticles(World world, Location location, Particle particle, DustOptions dustOptions, int amount, double speed, Vector spread) {
+		world.spawnParticle
+		(
+				particle,					// Particle type
+				location.getX(),			// Location X
+				location.getY(),			// Location Y
+				location.getZ(),			// Location Z
+				amount,						// Particle amount
+				spread.getX(),				// Particle spread X
+				spread.getY(),				// Particle spread Y
+				spread.getZ(),				// Particle spread Z
+				speed,						// Particle speed
+				dustOptions					// Particle type
+		);
 	}
 }

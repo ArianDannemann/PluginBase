@@ -27,7 +27,7 @@ public class Chat {
 	public void sendMessageToConsole(Plugin plugin, String message) {
 		
 		// Get the plugin name, use null if a plugin wasn't given
-		String pluginName = plugin == null ? "null" : plugin.getName();
+		String pluginName = plugin == null ? "null [PluginBase?]" : plugin.getName();
 		
 		// Get the console sender (so we can send colored chat messages)
 		ConsoleCommandSender consoleSender = Bukkit.getConsoleSender();

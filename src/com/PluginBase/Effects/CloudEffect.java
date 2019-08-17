@@ -42,7 +42,7 @@ public class CloudEffect extends Effect {
 				10,								// amount
 				0.01,							// speed
 				new Vector(0.3, 0, 0.3),		// spread
-				plugin,							// plugin
+				this.plugin,					// plugin
 				0,								// delay
 				2,								// period
 				600								// duration

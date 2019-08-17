@@ -59,7 +59,7 @@ public class ScaredEffect extends Effect {
 				30,								// amount
 				0.1,							// speed
 				new Vector(3, 3, 3),			// spread
-				plugin,							// plugin
+				this.plugin,					// plugin
 				0,								// delay
 				2,								// period
 				600								// duration
@@ -74,7 +74,7 @@ public class ScaredEffect extends Effect {
 				1,								// volume
 				1, 								// pitch
 				30,								// chance
-				plugin,							// plugin
+				this.plugin,					// plugin
 				0,								// delay
 				20,								// period
 				600								// duration
