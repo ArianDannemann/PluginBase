@@ -52,10 +52,13 @@ public class Chat {
 	 * 
 	 * @param message	The massage which will appear in the console
 	 */
-	public void sendErrorMessageToConsole(Plugin plugin, String message) {
+	public void sendErrorToConsole(Plugin plugin, String error, String explanation) {
 		
 		// Send the message over to the console
-		sendMessageToConsole(plugin, ChatColor.RED + "[ERROR] " + message);
+		sendMessageToConsole(plugin, ChatColor.RED + "[ERROR] " + error + ": " + explanation);
+		
+		// Also notify online admins
+		broadcastMessageToOPs(ChatColor.RED + "[ERROR] " + error + ChatColor.GRAY + " See console for further information");
 	}
 	
 	/**

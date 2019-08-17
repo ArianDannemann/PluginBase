@@ -210,11 +210,11 @@ public class ParticleEmitter {
 			if (particle == particleThatNeedsData) {
 				
 				// Log the error in the console
-				Chat.getInstance().sendErrorMessageToConsole
+				Chat.getInstance().sendErrorToConsole
 				(
 						null,
-						"Tried to emit particle that needs data:"
-						+ "Particle." + particle + " may need either dust options or block data to be spawned"
+						"Tried to emit particle without data",
+						"Particle." + particle + " may need either dust options or block data to be spawned"
 				);
 				
 				// Do not actually spawn the particle
