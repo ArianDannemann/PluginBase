@@ -2,6 +2,7 @@ package com.PluginBase;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -83,6 +84,26 @@ public class Chat {
 			
 			// Send them the broadcast
 			sendMessageToPlayer(onlinePlayer, message);
+		}
+	}
+	
+	/**
+	 * Sends a chat message to all online players in a defined wolrd
+	 * 
+	 * @param world		The world in which a player has to be to recieve the broadcast
+	 * @param message	The message all players in the world should recieve
+	 */
+	public void broadcastMessage(World world, String message) {
+		
+		// Loop through all online players
+		for (Player onlinePlayer: Bukkit.getOnlinePlayers()) {
+			
+			// Check if the player is on the requested world
+			if (onlinePlayer.getWorld() == world) {
+				
+				// Send them the broadcast
+				sendMessageToPlayer(onlinePlayer, message);
+			}
 		}
 	}
 	

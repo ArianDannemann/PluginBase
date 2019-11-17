@@ -29,8 +29,8 @@ public class MathHelper {
 	/**
 	 * Checks if a possibility occured
 	 * 
-	 * @param chance The possibility of a hit (in %)
-	 * @return If a hit occured
+	 * @param chance 	The possibility of a hit (in %)
+	 * @return 			If a hit occured
 	 */
 	public boolean hasChanceHit(double chance) {
 		return this.random.nextDouble() * 100 <= chance;
@@ -39,8 +39,8 @@ public class MathHelper {
 	/**
 	 * Checks if a possibility occured
 	 * 
-	 * @param chance The possibility of a hit (in %)
-	 * @return If a hit occured
+	 * @param chance 	The possibility of a hit (in %)
+	 * @return 			If a hit occured
 	 */
 	public boolean hasChanceHit(int chance) {
 		return this.random.nextInt(101) <= chance;
