@@ -1,6 +1,6 @@
 # Version 1.2
 
-- Added InventoryManager.java
+- Added InventoryManager.java and ItemCreator.java
 
 # Version 1.1
 
