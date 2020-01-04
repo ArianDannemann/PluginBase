@@ -17,7 +17,6 @@ import org.bukkit.util.Vector;
 public class LocationHelper {
 
 	public static final LocationHelper locationHelper = new LocationHelper();
-	
 	public static LocationHelper getInstance() {
 		return locationHelper;
 	}
@@ -104,6 +103,29 @@ public class LocationHelper {
 	}
 	
 	/**
+	 * Checks if a location has a block somewhere above it
+	 * 
+	 * @param location	The starting location
+	 * @return			True if the location has a block above it
+	 */
+	public boolean isLocationUnderBlocks(Location location) {
+		
+		// Aslong as the max build height wasn't reached
+		while(location.getY() <= 256) {
+			
+			// Increase the Y coordinate of the location by one
+			location.setY(location.getY() + 1);
+			
+			// Check if the location has a solid block
+			if (location.getBlock().getType().isSolid()) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	/**
 	 * Gets a random nearby validated position between two distances
 	 * 
 	 * @param startLocation		The location that will be used as the center of possible nearby positions
@@ -187,5 +209,95 @@ public class LocationHelper {
 		
 		// Return random validated location
 		return validatedRandomLocation;
+	}
+	
+	/**
+	 * Returns a list of all blocks between two locations (square shape)
+	 * 
+	 * @param location1		The start location
+	 * @param location2		The end location
+	 * @return				List of all blocks between the locations
+	 */
+	public List<Block> getBlocksBetweenLocations(Location location1, Location location2) {
+		
+		// Check if both locations are in the same world
+		if (location1.getWorld() != location2.getWorld()) {
+			Chat.getInstance().sendErrorToConsole(null, "Can't get blocks between locations", "The locations specified are not in the same dimension. "
+					+ "Getting a list of blocks between two locations only works if they are in the same world");
+			return null;
+		}
+		
+		// Prepare an empty list of blocks to return later on
+		List<Block> blocks = new ArrayList<>();
+		
+		/**
+		 * Here we take the smallest location (put all of the smallest values from location1 and location2 into a new location)
+		 * Then we get the biggest location. After this we can use a simple for loop to iterate from one to the other without
+		 * worrying about direction
+		 */
+		// Get the smallest possible location
+		Location startLocation = new Location
+		(
+				location1.getWorld(),
+				(location1.getX() > location2.getX()) ? location2.getX() : location1.getX(),
+				(location1.getY() > location2.getY()) ? location2.getY() : location1.getY(),
+				(location1.getZ() > location2.getZ()) ? location2.getZ() : location1.getZ()
+		);
+		// Get the biggest possible location
+		Location goalLocation = new Location
+		(
+				location1.getWorld(),
+				(location1.getX() < location2.getX()) ? location2.getX() : location1.getX(),
+				(location1.getY() < location2.getY()) ? location2.getY() : location1.getY(),
+				(location1.getZ() < location2.getZ()) ? location2.getZ() : location1.getZ()
+		);
+		
+		// Loop through all spots between the two locations
+		for (int x = startLocation.getBlockX(); x < goalLocation.getBlockX(); x++) {
+			for (int y = startLocation.getBlockY(); y < goalLocation.getBlockY(); y++) {
+				for (int z = startLocation.getBlockZ(); z < goalLocation.getBlockZ(); z++) {
+					
+					// Get the block that we are currently inspecting
+					Block block = new Location(location1.getWorld(), x, y, z).getBlock();
+					// Add it to the list
+					blocks.add(block);
+				}
+			}
+		}
+		
+		// Return the list of blocks
+		return blocks;
+	}
+	
+	/**
+	 * Get the smaller of two locations
+	 * @param location1		First location
+	 * @param location2		Second location
+	 * @return				The smaller location
+	 */
+	public Location getSmallerLocation(Location location1, Location location2) {
+		return new Location
+		(
+				location1.getWorld(),
+				(location1.getX() > location2.getX()) ? location2.getX() : location1.getX(),
+				(location1.getY() > location2.getY()) ? location2.getY() : location1.getY(),
+				(location1.getZ() > location2.getZ()) ? location2.getZ() : location1.getZ()
+		);
+	}
+	
+	/**
+	 * Get the bigger of two locations
+	 * @param location1		First location
+	 * @param location2		Second location
+	 * @return				The bigger location
+	 */
+	public Location getBiggerLocation(Location location1, Location location2) {
+		return new Location
+		(
+				location1.getWorld(),
+				(location1.getX() < location2.getX()) ? location2.getX() : location1.getX(),
+				(location1.getY() < location2.getY()) ? location2.getY() : location1.getY(),
+				(location1.getZ() < location2.getZ()) ? location2.getZ() : location1.getZ()
+		);
 	}
 }
