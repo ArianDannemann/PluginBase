@@ -2,6 +2,7 @@
 
 - Added InventoryManager.java and ItemCreator.java
 - Added ``getBlocksBetweenLocations(Location location1, Location location2)``, ``getSmallerLocation(Location location1, Location location2)``, ``getBiggerLocation(Location location1, Location location2)``, and ``isLocationUnderBlocks(Location location)``
+- Added Darkness effect
 
 # Version 1.1
 
