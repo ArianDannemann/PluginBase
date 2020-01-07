@@ -202,7 +202,7 @@ public class LocationHelper {
 		
 		if (tries >= maximumTries - 1) {
 			Chat.getInstance().sendWarningMessageToConsole(
-					null,
+					"PluginBase",
 					"Exceeded maximum amount of tries while trying to find a random nearby location. " 
 					+ "The resulting location may not be suitable for entities");
 		}
@@ -219,14 +219,15 @@ public class LocationHelper {
 	 * @return				List of all blocks between the locations
 	 */
 	public List<Block> getBlocksBetweenLocations(Location location1, Location location2) {
-		
+
 		// Check if both locations are in the same world
 		if (location1.getWorld() != location2.getWorld()) {
-			Chat.getInstance().sendErrorToConsole(null, "Can't get blocks between locations", "The locations specified are not in the same dimension. "
-					+ "Getting a list of blocks between two locations only works if they are in the same world");
+			Chat.getInstance().sendErrorToConsole("PluginBase", "Can't get blocks between locations",
+					"The locations specified are not in the same dimension. "
+							+ "Getting a list of blocks between two locations only works if they are in the same world");
 			return null;
 		}
-		
+
 		// Prepare an empty list of blocks to return later on
 		List<Block> blocks = new ArrayList<>();
 		

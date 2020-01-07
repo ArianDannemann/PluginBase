@@ -212,7 +212,7 @@ public class ParticleEmitter {
 				// Log the error in the console
 				Chat.getInstance().sendErrorToConsole
 				(
-						null,
+						"PluginBase",
 						"Tried to emit particle without data",
 						"Particle." + particle + " may need either dust options or block data to be spawned"
 				);

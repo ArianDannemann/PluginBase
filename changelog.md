@@ -3,6 +3,7 @@
 - Added InventoryManager.java and ItemCreator.java
 - Added ``getBlocksBetweenLocations(Location location1, Location location2)``, ``getSmallerLocation(Location location1, Location location2)``, ``getBiggerLocation(Location location1, Location location2)``, and ``isLocationUnderBlocks(Location location)``
 - Added Darkness effect
+- Added ``sendMessageToConsole(String pluginName, String message)``, ``sendWarningMessageToConsole(String pluginName, String message)`` and``sendErrorToConsole(String pluginName, String error, String explanation)``
 
 # Version 1.1
 

@@ -23,6 +23,21 @@ public class Chat {
 	/**
 	 * Sends a message to the console
 	 * 
+	 * @param pluginName	The name of the plugin that send the message
+	 * @param message		The massage which will appear in the console
+	 */
+	public void sendMessageToConsole(String pluginName, String message) {
+		
+		// Get the console sender (so we can send colored chat messages)
+		ConsoleCommandSender consoleSender = Bukkit.getConsoleSender();
+		
+		// Send the message over to the console
+		consoleSender.sendMessage("[" + pluginName + "] " + message);
+	}
+	
+	/**
+	 * Sends a message to the console
+	 * 
 	 * @param message	The massage which will appear in the console
 	 */
 	public void sendMessageToConsole(Plugin plugin, String message) {
@@ -30,11 +45,18 @@ public class Chat {
 		// Get the plugin name, use null if a plugin wasn't given
 		String pluginName = plugin == null ? "null [PluginBase?]" : plugin.getName();
 		
-		// Get the console sender (so we can send colored chat messages)
-		ConsoleCommandSender consoleSender = Bukkit.getConsoleSender();
-		
+		sendMessageToConsole(pluginName, message);
+	}
+	
+	/**
+	 * Sends a message with an error prefix to the console
+	 * 
+	 * @param message	The massage which will appear in the console
+	 */
+	public void sendWarningMessageToConsole(String pluginName, String message) {
+
 		// Send the message over to the console
-		consoleSender.sendMessage("[" + pluginName + "] " + message);
+		sendMessageToConsole(pluginName, ChatColor.YELLOW + "[WARNING] " + message);
 	}
 	
 	/**
@@ -53,13 +75,26 @@ public class Chat {
 	 * 
 	 * @param message	The massage which will appear in the console
 	 */
-	public void sendErrorToConsole(Plugin plugin, String error, String explanation) {
+	public void sendErrorToConsole(String pluginName, String error, String explanation) {
 		
 		// Send the message over to the console
-		sendMessageToConsole(plugin, ChatColor.RED + "[ERROR] " + error + ": " + explanation);
+		sendMessageToConsole(pluginName, ChatColor.RED + "[ERROR] " + error + ": " + explanation);
 		
 		// Also notify online admins
 		broadcastMessageToOPs(ChatColor.RED + "[ERROR] " + error + ChatColor.GRAY + " See console for further information");
+	}
+	
+	/**
+	 * Sends a message with an error prefix to the console
+	 * 
+	 * @param message	The massage which will appear in the console
+	 */
+	public void sendErrorToConsole(Plugin plugin, String error, String explanation) {
+		
+		// Get the plugin name, use null if a plugin wasn't given
+		String pluginName = plugin == null ? "null [PluginBase?]" : plugin.getName();
+		
+		sendErrorToConsole(pluginName, error, explanation);
 	}
 	
 	/**
