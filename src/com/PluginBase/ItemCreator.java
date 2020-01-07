@@ -1,5 +1,6 @@
 package com.PluginBase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Material;
@@ -17,6 +18,27 @@ public class ItemCreator {
 	
 	public static ItemCreator getInstance() {
 		return itemCreator;
+	}
+	
+	/**
+	 * Creates an item with set custom information
+	 * 
+	 * @param type		The item type
+	 * @param amount	The amout of items
+	 * @param name		The item name
+	 * @param lore		The item description
+	 * @return			Generate item stack
+	 */
+	public ItemStack createItem(Material type, int amount, String name, String loreString) {
+		
+		List<String> loreList = new ArrayList<>();
+		String[] loreArray = loreString.split("\n");
+		
+		for (String loreLine : loreArray) {
+			loreList.add(loreLine);
+		}
+		
+		return createItem(type, amount, name, loreList);
 	}
 	
 	/**
