@@ -5,6 +5,7 @@
 - Added Darkness effect
 - Added ``sendMessageToConsole(String pluginName, String message)``, ``sendWarningMessageToConsole(String pluginName, String message)`` and``sendErrorToConsole(String pluginName, String error, String explanation)``
 - Added ``createItem(Material type, int amount, String name, String loreString)`` which will enable adding multiple lines of lore using ``\n`` as a divider
+- Fixed bug: Validating a location that is at Y level 1 or below would lead to a server crash
 
 # Version 1.1
 

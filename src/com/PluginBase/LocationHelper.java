@@ -92,7 +92,7 @@ public class LocationHelper {
 		}
 		
 		// While block under location is not solid
-		while (!offsetLocation(validatedLocation, new Vector(0, -1, 0)).getBlock().getType().isSolid()) {
+		while (!offsetLocation(validatedLocation, new Vector(0, -1, 0)).getBlock().getType().isSolid() && validatedLocation.getBlockY() > 0) {
 			
 			// Move location down one
 			validatedLocation.setY(validatedLocation.getY() - 1);
