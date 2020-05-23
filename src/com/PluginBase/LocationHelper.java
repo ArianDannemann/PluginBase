@@ -143,14 +143,17 @@ public class LocationHelper {
 	 * @return If the location is in the air
 	 */
 	public boolean isLocationInAir(Location location) {
-		for (int x = -1; x <= 1; x++) {
-			for (int z = -1; z <= 1; z++) {
-				// Get the nearby location
-				Location nearbyLocation = new Location(location.getWorld(), location.getX() + x, location.getY() - 1.25,
-						location.getZ() + z);
-				// Check if it is a solid block
-				if (nearbyLocation.getBlock().getType().isSolid()) {
-					return false;
+		for (int x = -2; x <= 2; x++) {
+			for (int y = -2; y <= 1; y++) {
+				for (int z = -2; z <= 2; z++) {
+					// Get the nearby location
+					Location nearbyLocation = new Location(location.getWorld(), location.getX() + x, location.getY() + y,
+							location.getZ() + z);
+					// Check if it is a solid block
+					if (nearbyLocation.getBlock().getType() != Material.AIR
+							&& nearbyLocation.getBlock().getType() != Material.CAVE_AIR) {
+						return false;
+					}
 				}
 			}
 		}
