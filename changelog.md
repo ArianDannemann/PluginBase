@@ -1,3 +1,7 @@
+# Version 1.3
+
+- Added ``isLocationInAir(Location location)``
+
 # Version 1.2
 
 - Added InventoryManager.java and ItemCreator.java
